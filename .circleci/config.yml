@@ -8,6 +8,7 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install -y build-essential libssl-dev
       - run: sudo apt install -y cmake
+      - run: mkdir build
       - run: cmake --build build --target tests
       - run: ./build/tests
       - run: echo "hello world" # run the `echo` command
