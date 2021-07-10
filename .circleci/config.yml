@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: sudo apt update
-      - run: sudo apt install -y build-essential libssl-dev
+      - run: sudo apt install -y build-essential libssl-dev libncurses5-dev
       - run: sudo apt install -y cmake
       - run: mkdir build
       - run: cd build && cmake ..
