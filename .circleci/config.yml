@@ -14,11 +14,13 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - ./build
+      - run: ls -R
   test:
     docker:
       - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
     steps:
+      - run: ls -R
       - run: npm i -D tap-junit
       - run: BDD_USE_TAP=1 ./build/tests | ./node_modules/tap-junit/bin/tap-junit --output results
       - store_test_results:
