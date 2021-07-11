@@ -20,6 +20,8 @@ jobs:
     docker:
       - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
     steps:
+      - attach_workspace:
+          at: .
       - run: ls -R
       - run: npm i -D tap-junit
       - run: BDD_USE_TAP=1 ./build/tests | ./node_modules/tap-junit/bin/tap-junit --output results
