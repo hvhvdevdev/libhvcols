@@ -15,6 +15,7 @@
 #define hvLinkedList_push_back_Item CONCAT(hvLinkedList_push_back_,Item)
 #define hvLinkedList_push_front_Item CONCAT(hvLinkedList_push_front_,Item)
 #define hvLinkedList_nth_Item CONCAT(hvLinkedList_nth_,Item)
+#define hvLinkedList_pop_front_Item CONCAT(hvLinkedList_pop_front_,Item)
 
 /**
  * Linked List Data Struct.
@@ -83,6 +84,13 @@ bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
     return true;
 }
 
+/**
+ * Get nth item
+ * @param head Head of the list
+ * @param n Index
+ * @param output Where to save result?
+ * @return true if success. False otherwise
+ */
 bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) {
     hvLinkedListOfItem *ptr = head;
 
@@ -99,7 +107,25 @@ bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) 
     return true;
 }
 
+/**
+ * Pop first item and return it
+ * @param head Head of the list
+ * @param output Where to save result?
+ * @return first item in the list
+ */
+bool hvLinkedList_pop_front_Item(hvLinkedListOfItem **head, Item *output) {
+    // Is empty?
+    if (!*head) {
+        return false;
+    }
+
+    *output = (*head)->item;
+    *head = (*head)->next;
+    return true;
+}
+
 #undef hvLinkedListOfItem
 #undef hvLinkedList_push_back_Item
 #undef hvLinkedList_push_front_Item
-#undef hvLinkedList_nth_Item;
+#undef hvLinkedList_nth_Item
+#undef hvLinkedList_pop_front_Item

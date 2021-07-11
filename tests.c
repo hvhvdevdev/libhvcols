@@ -40,6 +40,7 @@ spec("LinkedList") {
             my_list = NULL;
             hvLinkedList_push_back_int(&my_list, 1);
         }
+
         it("should append 2 successfully") check(hvLinkedList_push_back_int(&my_list, 2))
         it("should still have 1 as the first item") check(my_list->item == 1)
         it("should have 2 as the second item") check(my_list->next->item == 2)
@@ -64,7 +65,26 @@ spec("LinkedList") {
         }
         it("should fail to get fifth item") {
             int output;
-            check(hvLinkedList_nth_int(my_list, 4, &output) == false)
+            check(!hvLinkedList_nth_int(my_list, 4, &output))
+        }
+        it("should pop first item successfully and return 3") {
+            int output;
+            check(hvLinkedList_pop_front_int(&my_list, &output))
+            check(output == 3)
+        }
+        it("should pop first item successfully and return 1") {
+            int output;
+            check(hvLinkedList_pop_front_int(&my_list, &output))
+            check(output == 1)
+        }
+        it("should pop first item successfully and return 2") {
+            int output;
+            check(hvLinkedList_pop_front_int(&my_list, &output))
+            check(output == 2)
+        }
+        it("should fail to pop first item") {
+            int output;
+            check(!hvLinkedList_pop_front_int(&my_list, &output))
         }
     }
 
@@ -73,6 +93,7 @@ spec("LinkedList") {
             my_float_list = NULL;
             hvLinkedList_push_back_float(&my_float_list, 1.0f);
         }
+
         it("should append 2.5f successfully") check(hvLinkedList_push_back_float(&my_float_list, 2.5f))
         it("should still have 1.0f as the first item") check(my_float_list->item == 1.0f)
         it("should have 2.5f as the second item") check(my_float_list->next->item == 2.5f)
