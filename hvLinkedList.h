@@ -18,7 +18,7 @@
 #define hvLinkedList_pop_front_Item CONCAT(hvLinkedList_pop_front_,Item)
 
 /**
- * Linked List Data Struct.
+ * Linked List Data Structure.
  */
 typedef struct hvLinkedListOfItem {
     Item item;
