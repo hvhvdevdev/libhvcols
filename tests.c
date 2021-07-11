@@ -3,7 +3,6 @@
 #include "vendor/bdd-for-c.h"
 #include "hvLinkedList.h"
 
-#undef LIBHVCOLS_HVLINKEDLIST_H
 #define Item float
 
 #include "hvLinkedList.h"

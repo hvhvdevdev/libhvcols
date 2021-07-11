@@ -2,9 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-#ifndef LIBHVCOLS_HVLINKEDLIST_H
-#define LIBHVCOLS_HVLINKEDLIST_H
-
 #ifndef Item
 #define Item int
 #endif
@@ -57,4 +54,3 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
 
 #undef hvLinkedListOfItem
 #undef hvLinkedList_push_back_Item
-#endif //LIBHVCOLS_HVLINKEDLIST_H
