@@ -32,6 +32,9 @@ spec("LinkedList append") {
         it("should still have 1 as the first item") check(my_list->item == 1)
         it("should have 2 as the second item") check(my_list->next->item == 2)
         it("should not have third item") check(my_list->next->next == NULL)
+        it("should prepend 3 successfully") check(hvLinkedList_push_front_int(&my_list, 3))
+        it("should have 3 as first item") check(my_list->item == 3)
+        it("should have 1 as second item") check(my_list->next->item == 1)
     }
 
     context("my_float_list have 1.0f as its only item") {

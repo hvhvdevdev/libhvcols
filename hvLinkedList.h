@@ -11,6 +11,7 @@
 
 #define hvLinkedListOfItem CONCAT(hvLinkedListOf,Item)
 #define hvLinkedList_push_back_Item CONCAT(hvLinkedList_push_back_,Item)
+#define hvLinkedList_push_front_Item CONCAT(hvLinkedList_push_front_,Item)
 
 /**
  * Linked List Data Struct.
@@ -57,5 +58,28 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     return false;
 }
 
+/**
+ * Prepend an item.
+ * @param head Head of the list.
+ * @param item Item to insert.
+ * @return true if success. False otherwise.
+ */
+bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
+    hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
+    // Allocation failed?
+    if (!node) {
+        return false;
+    }
+
+    // Initialize node
+    node->next = *head;
+    node->item = item;
+
+    *head = node;
+
+    return true;
+}
+
 #undef hvLinkedListOfItem
 #undef hvLinkedList_push_back_Item
+#undef hvLinkedList_push_front_Item
