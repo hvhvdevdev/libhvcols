@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+#include <stdint.h>
+
 #ifndef Item
 #define Item int
 #endif
@@ -12,6 +14,7 @@
 #define hvLinkedListOfItem CONCAT(hvLinkedListOf,Item)
 #define hvLinkedList_push_back_Item CONCAT(hvLinkedList_push_back_,Item)
 #define hvLinkedList_push_front_Item CONCAT(hvLinkedList_push_front_,Item)
+#define hvLinkedList_nth_Item CONCAT(hvLinkedList_nth_,Item)
 
 /**
  * Linked List Data Struct.
@@ -80,6 +83,23 @@ bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
     return true;
 }
 
+bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) {
+    hvLinkedListOfItem *ptr = head;
+
+    while (n--) {
+        ptr = ptr->next;
+
+        // Out of range?
+        if (ptr == NULL) {
+            return false;
+        }
+    }
+
+    *output = ptr->item;
+    return true;
+}
+
 #undef hvLinkedListOfItem
 #undef hvLinkedList_push_back_Item
 #undef hvLinkedList_push_front_Item
+#undef hvLinkedList_nth_Item;

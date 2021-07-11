@@ -47,6 +47,25 @@ spec("LinkedList") {
         it("should prepend 3 successfully") check(hvLinkedList_push_front_int(&my_list, 3))
         it("should have 3 as first item") check(my_list->item == 3)
         it("should have 1 as second item") check(my_list->next->item == 1)
+        it("should not have fourth item") check(my_list->next->next->next == NULL)
+        it("should get first item successfully and return 3") {
+            int output;
+            check(hvLinkedList_nth_int(my_list, 0, &output))
+            check(output == 3)
+        }
+        it("should get third item successfully and return 2") {
+            int output;
+            check(hvLinkedList_nth_int(my_list, 2, &output))
+            check(output == 2)
+        }
+        it("should fail to get fourth item") {
+            int output;
+            check(hvLinkedList_nth_int(my_list, 3, &output) == false)
+        }
+        it("should fail to get fifth item") {
+            int output;
+            check(hvLinkedList_nth_int(my_list, 4, &output) == false)
+        }
     }
 
     context("my_float_list have 1.0f as its only item") {
