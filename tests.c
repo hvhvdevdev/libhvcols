@@ -3,100 +3,62 @@
 #include "vendor/bdd-for-c.h"
 #include "hvLinkedList.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
+
 #define Item float
+
+#include "hvLinkedList.h"
+
+#define Item char
 
 #include "hvLinkedList.h"
 
 #undef Item
 
+
 spec("LinkedList") {
-    static hvLinkedListOfint *my_list;
     static hvLinkedListOffloat *my_float_list;
+    static hvLinkedListOfchar *my_char_list;
+    static float output;
 
-    context("my_list is empty") {
-        describe("Append item to list") {
-            before() {
-                my_list = NULL;
-            }
-
-            it("should append 1 successfully") check(hvLinkedList_push_back_int(&my_list, 1))
-            it("should have 1 as the first item") check(my_list->item == 1)
-            it("should not have second item") check(my_list->next == NULL)
-        }
-
-        describe("Prepend item to list") {
-            before() {
-                my_list = NULL;
-            }
-
-            it("should prepend 1 successfully") check(hvLinkedList_push_front_int(&my_list, 1))
-            it("should have 1 as the first item") check(my_list->item == 1)
-            it("should not have second item") check(my_list->next == NULL)
-        }
-    }
-
-    context("my_list have 1 as its only item") {
-        before() {
-            my_list = NULL;
-            hvLinkedList_push_back_int(&my_list, 1);
-        }
-
-        it("should append 2 successfully") check(hvLinkedList_push_back_int(&my_list, 2))
-        it("should still have 1 as the first item") check(my_list->item == 1)
-        it("should have 2 as the second item") check(my_list->next->item == 2)
-        it("should not have third item") check(my_list->next->next == NULL)
-        it("should prepend 3 successfully") check(hvLinkedList_push_front_int(&my_list, 3))
-        it("should have 3 as first item") check(my_list->item == 3)
-        it("should have 1 as second item") check(my_list->next->item == 1)
-        it("should not have fourth item") check(my_list->next->next->next == NULL)
-        it("should get first item successfully and return 3") {
-            int output;
-            check(hvLinkedList_nth_int(my_list, 0, &output))
-            check(output == 3)
-        }
-        it("should get third item successfully and return 2") {
-            int output;
-            check(hvLinkedList_nth_int(my_list, 2, &output))
-            check(output == 2)
-        }
-        it("should fail to get fourth item") {
-            int output;
-            check(hvLinkedList_nth_int(my_list, 3, &output) == false)
-        }
-        it("should fail to get fifth item") {
-            int output;
-            check(!hvLinkedList_nth_int(my_list, 4, &output))
-        }
-        it("should pop first item successfully and return 3") {
-            int output;
-            check(hvLinkedList_pop_front_int(&my_list, &output))
-            check(output == 3)
-        }
-        it("should pop first item successfully and return 1") {
-            int output;
-            check(hvLinkedList_pop_front_int(&my_list, &output))
-            check(output == 1)
-        }
-        it("should pop first item successfully and return 2") {
-            int output;
-            check(hvLinkedList_pop_front_int(&my_list, &output))
-            check(output == 2)
-        }
-        it("should fail to pop first item") {
-            int output;
-            check(!hvLinkedList_pop_front_int(&my_list, &output))
-        }
-    }
-
-    context("my_float_list have 1.0f as its only item") {
-        before() {
+    context("List of float is empty") {
+        before_each() {
             my_float_list = NULL;
-            hvLinkedList_push_back_float(&my_float_list, 1.0f);
         }
 
-        it("should append 2.5f successfully") check(hvLinkedList_push_back_float(&my_float_list, 2.5f))
-        it("should still have 1.0f as the first item") check(my_float_list->item == 1.0f)
-        it("should have 2.5f as the second item") check(my_float_list->next->item == 2.5f)
-        it("should not have third item") check(my_float_list->next->next == NULL)
+        describe("push_back") {
+            it("should insert item to head") {
+                check(hvLinkedList_push_back_float(&my_float_list, 1.0f))
+                check(my_float_list->item == 1.0f)
+            }
+
+            it("should insert 2 items in right order") {
+                check(hvLinkedList_push_back_float(&my_float_list, 1.0f))
+                check(hvLinkedList_push_back_float(&my_float_list, 2.0f))
+                check(my_float_list->item == 1.0f)
+                check(my_float_list->next->item == 2.0f)
+            }
+        }
+
+        describe("push_front") {
+            it("should insert item to head") {
+                check(hvLinkedList_push_front_float(&my_float_list, 1.0f))
+                check(my_float_list->item == 1.0f)
+            }
+
+            it("should insert 2 items in reverse order") {
+                check(hvLinkedList_push_front_float(&my_float_list, 1.0f))
+                check(hvLinkedList_push_front_float(&my_float_list, 2.0f))
+                check(my_float_list->item == 2.0f)
+                check(my_float_list->next->item == 1.0f)
+            }
+        }
+
+        describe("pop_front") {
+            it("should fail") check(!hvLinkedList_pop_front_float(&my_float_list, &output))
+        }
     }
 }
+
+#pragma clang diagnostic pop
