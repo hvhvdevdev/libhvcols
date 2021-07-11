@@ -12,14 +12,20 @@
 #define hvLinkedListOfItem CONCAT(hvLinkedListOf,Item)
 #define hvLinkedList_push_back_Item CONCAT(hvLinkedList_push_back_,Item)
 
-/** \brief Linked List Data Structure.
- *
+/**
+ * Linked List Data Struct.
  */
 typedef struct hvLinkedListOfItem {
     Item item;
     struct hvLinkedListOfItem *next;
 } hvLinkedListOfItem;
 
+/**
+ * Append an item.
+ * @param head Head of the list.
+ * @param item Item to insert.
+ * @return true if success. False otherwise.
+ */
 bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
     // Allocation failed?
@@ -50,7 +56,6 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     // Should not happen
     return false;
 }
-
 
 #undef hvLinkedListOfItem
 #undef hvLinkedList_push_back_Item
