@@ -9,18 +9,30 @@
 
 #undef Item
 
-spec("LinkedList append") {
+spec("LinkedList") {
     static hvLinkedListOfint *my_list;
     static hvLinkedListOffloat *my_float_list;
 
     context("my_list is empty") {
-        before() {
-            my_list = NULL;
+        describe("Append item to list") {
+            before() {
+                my_list = NULL;
+            }
+
+            it("should append 1 successfully") check(hvLinkedList_push_back_int(&my_list, 1))
+            it("should have 1 as the first item") check(my_list->item == 1)
+            it("should not have second item") check(my_list->next == NULL)
         }
 
-        it("should append 1 successfully") check(hvLinkedList_push_back_int(&my_list, 1))
-        it("should have 1 as the first item") check(my_list->item == 1)
-        it("should not have second item") check(my_list->next == NULL)
+        describe("Prepend item to list") {
+            before() {
+                my_list = NULL;
+            }
+
+            it("should prepend 1 successfully") check(hvLinkedList_push_front_int(&my_list, 1))
+            it("should have 1 as the first item") check(my_list->item == 1)
+            it("should not have second item") check(my_list->next == NULL)
+        }
     }
 
     context("my_list have 1 as its only item") {
