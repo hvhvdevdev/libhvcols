@@ -33,6 +33,7 @@ typedef struct hvLinkedListOfItem {
  */
 bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
+
     // Allocation failed?
     if (!node) {
         return false;
@@ -43,6 +44,7 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     node->item = item;
 
     hvLinkedListOfItem *ptr = *head;
+
     // Is empty?
     if (!ptr) {
         *head = node;
@@ -55,6 +57,7 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
             ptr->next = node;
             return true;
         }
+
         ptr = ptr->next;
     }
 
@@ -70,6 +73,7 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
  */
 bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
     hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
+
     // Allocation failed?
     if (!node) {
         return false;
@@ -94,6 +98,11 @@ bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
 bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) {
     hvLinkedListOfItem *ptr = head;
 
+    // Is empty?
+    if (!head) {
+        return false;
+    }
+
     while (n--) {
         ptr = ptr->next;
 
@@ -104,6 +113,7 @@ bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) 
     }
 
     *output = ptr->item;
+
     return true;
 }
 
@@ -121,6 +131,7 @@ bool hvLinkedList_pop_front_Item(hvLinkedListOfItem **head, Item *output) {
 
     *output = (*head)->item;
     *head = (*head)->next;
+
     return true;
 }
 
