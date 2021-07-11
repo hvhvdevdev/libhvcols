@@ -11,9 +11,20 @@ jobs:
       - run: npm i -D tap-junit
       - run: mkdir build
       - run: cd build && cmake ..
-      - run: cmake --build build --target tests
+      - run: cmake --build build
+  test:
+    docker:
+      - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+    steps:
       - run: BDD_USE_TAP=1 ./build/tests | ./node_modules/tap-junit/bin/tap-junit --output results
-
       - store_test_results:
           path: results
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
 
