@@ -58,6 +58,16 @@ spec("LinkedList") {
         describe("pop_front") {
             it("should fail") check(!hvLinkedList_pop_front_float(&my_float_list, &output))
         }
+
+        describe("nth") {
+            it("should fail with index 0") {
+                check(!hvLinkedList_nth_float(my_float_list, 0, &output))
+            }
+
+            it("should fail with index 1") {
+                check(!hvLinkedList_nth_float(my_float_list, 1, &output))
+            }
+        }
     }
 }
 
