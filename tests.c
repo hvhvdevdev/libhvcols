@@ -116,6 +116,47 @@ spec("LinkedList") {
             }
         }
     }
+
+    context("List of char has 3 elements") {
+        before_each() {
+            my_char_list = NULL;
+            LinkedList_char_push_back(&my_char_list, 'a');
+            LinkedList_char_push_back(&my_char_list, 'b');
+            LinkedList_char_push_back(&my_char_list, 'c');
+        }
+
+        describe("nth") {
+            it("should get first item") {
+                check(LinkedList_char_nth(my_char_list, 0, &output_c))
+                check(output_c == 'a')
+            }
+
+            it("should get second item") {
+                check(LinkedList_char_nth(my_char_list, 1, &output_c))
+                check(output_c == 'b')
+            }
+
+            it("should get first item") {
+                check(LinkedList_char_nth(my_char_list, 2, &output_c))
+                check(output_c == 'c')
+            }
+
+            it("should fail to get fourth item") {
+                check(!LinkedList_char_nth(my_char_list, 3, &output_c))
+            }
+        }
+
+        describe("pop_front") {
+            it("should get three items in right order") {
+                check(LinkedList_char_pop_front(&my_char_list, &output_c))
+                check(output_c == 'a')
+                check(LinkedList_char_pop_front(&my_char_list, &output_c))
+                check(output_c == 'b')
+                check(LinkedList_char_pop_front(&my_char_list, &output_c))
+                check(output_c == 'c')
+            }
+        }
+    }
 }
 
 #pragma clang diagnostic pop
