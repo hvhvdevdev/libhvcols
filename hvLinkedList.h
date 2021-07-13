@@ -8,22 +8,22 @@
 #define Item int
 #endif
 
-#define _CONCAT(id1, id2) id1##id2
-#define CONCAT(id1, id2) _CONCAT(id1,id2)
+#define _CONCAT(id1, id2, id3) id1##id2##id3
+#define CONCAT(id1, id2, id3) _CONCAT(id1,id2,id3)
 
-#define hvLinkedListOfItem CONCAT(hvLinkedListOf,Item)
-#define hvLinkedList_push_back_Item CONCAT(hvLinkedList_push_back_,Item)
-#define hvLinkedList_push_front_Item CONCAT(hvLinkedList_push_front_,Item)
-#define hvLinkedList_nth_Item CONCAT(hvLinkedList_nth_,Item)
-#define hvLinkedList_pop_front_Item CONCAT(hvLinkedList_pop_front_,Item)
+#define LinkedList CONCAT(LinkedList_,Item,)
+#define LinkedList_push_back CONCAT(LinkedList_,Item,_push_back)
+#define LinkedList_push_front CONCAT(LinkedList_,Item,_push_front)
+#define LinkedList_nth CONCAT(LinkedList_,Item,_nth)
+#define LinkedList_pop_front CONCAT(LinkedList_,Item,_pop_front)
 
 /**
  * Linked List Data Structure
  */
-typedef struct hvLinkedListOfItem {
+typedef struct LinkedList {
     Item item;
-    struct hvLinkedListOfItem *next;
-} hvLinkedListOfItem;
+    struct LinkedList *next;
+} LinkedList;
 
 /**
  * Append an item.
@@ -31,8 +31,8 @@ typedef struct hvLinkedListOfItem {
  * @param item Item to insert.
  * @return true if success. False otherwise.
  */
-bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
-    hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
+bool LinkedList_push_back(LinkedList **head, Item item) {
+    LinkedList *node = malloc(sizeof(LinkedList));
 
     // Allocation failed?
     if (!node) {
@@ -43,7 +43,7 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
     node->next = NULL;
     node->item = item;
 
-    hvLinkedListOfItem *ptr = *head;
+    LinkedList *ptr = *head;
 
     // Is empty?
     if (!ptr) {
@@ -71,8 +71,8 @@ bool hvLinkedList_push_back_Item(hvLinkedListOfItem **head, Item item) {
  * @param item Item to insert.
  * @return true if success. False otherwise.
  */
-bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
-    hvLinkedListOfItem *node = malloc(sizeof(hvLinkedListOfItem));
+bool LinkedList_push_front(LinkedList **head, Item item) {
+    LinkedList *node = malloc(sizeof(LinkedList));
 
     // Allocation failed?
     if (!node) {
@@ -95,10 +95,10 @@ bool hvLinkedList_push_front_Item(hvLinkedListOfItem **head, Item item) {
  * @param output Where to save result?
  * @return true if success. False otherwise
  */
-bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) {
-    hvLinkedListOfItem *ptr = head;
+bool LinkedList_nth(LinkedList *head, uintptr_t n, Item *output) {
+    LinkedList *ptr = head;
 
-    // Is empty?
+// Is empty?
     if (!head) {
         return false;
     }
@@ -106,13 +106,14 @@ bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) 
     while (n--) {
         ptr = ptr->next;
 
-        // Out of range?
+// Out of range?
         if (ptr == NULL) {
             return false;
         }
     }
 
-    *output = ptr->item;
+    *
+            output = ptr->item;
 
     return true;
 }
@@ -123,7 +124,7 @@ bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) 
  * @param output Where to save result?
  * @return true if success. False otherwise.
  */
-bool hvLinkedList_pop_front_Item(hvLinkedListOfItem **head, Item *output) {
+bool LinkedList_pop_front(LinkedList **head, Item *output) {
     // Is empty?
     if (!*head) {
         return false;
@@ -135,8 +136,8 @@ bool hvLinkedList_pop_front_Item(hvLinkedListOfItem **head, Item *output) {
     return true;
 }
 
-#undef hvLinkedListOfItem
-#undef hvLinkedList_push_back_Item
-#undef hvLinkedList_push_front_Item
-#undef hvLinkedList_nth_Item
-#undef hvLinkedList_pop_front_Item
+#undef LinkedList
+#undef LinkedList_push_back
+#undef LinkedList_push_front
+#undef LinkedList_nth
+#undef LinkedList_pop_front
