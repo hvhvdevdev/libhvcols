@@ -17,6 +17,7 @@
 #define LinkedList_nth CONCAT(LinkedList_,Item,_nth)
 #define LinkedList_pop_front CONCAT(LinkedList_,Item,_pop_front)
 #define LinkedList_pop_back CONCAT(LinkedList_,Item,_pop_back)
+#define LinkedList_size CONCAT(LinkedList_,Item,_size)
 
 /**
  * Linked List Data Structure
@@ -145,7 +146,7 @@ bool LinkedList_pop_back(LinkedList **head, Item *output) {
 
     // Single element?
     if (!(*head)->next) {
-        return LinkedList_int_pop_front(head, output);
+        return LinkedList_pop_front(head, output);
     }
 
     LinkedList *ptr = *head;
@@ -154,9 +155,21 @@ bool LinkedList_pop_back(LinkedList **head, Item *output) {
         ptr = ptr->next;
     }
 
+    *output = ptr->next->item;
     ptr->next = NULL;
 
     return true;
+}
+
+uintptr_t LinkedList_size(LinkedList *ptr) {
+    uintptr_t size = 0;
+
+    while (ptr) {
+        size++;
+        ptr = ptr->next;
+    }
+
+    return size;
 }
 
 #undef LinkedList
@@ -164,4 +177,5 @@ bool LinkedList_pop_back(LinkedList **head, Item *output) {
 #undef LinkedList_push_front
 #undef LinkedList_nth
 #undef LinkedList_pop_front
-#undef LinkedList_pop_back;
+#undef LinkedList_pop_back
+#undef LinkedList_size
