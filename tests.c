@@ -156,6 +156,17 @@ spec("LinkedList") {
                 check(output_c == 'c')
             }
         }
+
+        describe("pop_back") {
+            it("should get three items in reverse order") {
+                check(LinkedList_char_pop_back(&my_char_list, &output_c))
+                check(output_c == 'c')
+                check(LinkedList_char_pop_back(&my_char_list, &output_c))
+                check(output_c == 'b')
+                check(LinkedList_char_pop_back(&my_char_list, &output_c))
+                check(output_c == 'a')
+            }
+        }
     }
 }
 
