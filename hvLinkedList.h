@@ -138,6 +138,12 @@ bool LinkedList_pop_front(LinkedList **head, Item *output) {
     return true;
 }
 
+/**
+ * Pop last item and return it
+ * @param head Head of the list
+ * @param output Where to save result?
+ * @return true if success. False otherwise.
+ */
 bool LinkedList_pop_back(LinkedList **head, Item *output) {
     // Is empty?
     if (!*head) {
@@ -161,6 +167,11 @@ bool LinkedList_pop_back(LinkedList **head, Item *output) {
     return true;
 }
 
+/**
+ * Size of list
+ * @param ptr
+ * @return size of list.
+ */
 uintptr_t LinkedList_size(LinkedList *ptr) {
     uintptr_t size = 0;
 
