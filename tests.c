@@ -74,6 +74,12 @@ spec("LinkedList") {
                 check(!LinkedList_float_nth(my_float_list, 1, &output_f))
             }
         }
+
+        describe("size") {
+            it("should be 0") {
+                check(LinkedList_float_size(my_float_list) == 0)
+            }
+        }
     }
 
     context("List of char has 1 element") {
@@ -115,6 +121,12 @@ spec("LinkedList") {
                 check(!LinkedList_char_pop_back(&my_char_list, &output_c))
             }
         }
+
+        describe("size") {
+            it("should be 1") {
+                check(LinkedList_float_size(my_char_list) == 1)
+            }
+        }
     }
 
     context("List of char has 3 elements") {
@@ -154,6 +166,7 @@ spec("LinkedList") {
                 check(output_c == 'b')
                 check(LinkedList_char_pop_front(&my_char_list, &output_c))
                 check(output_c == 'c')
+                check(LinkedList_char_size(my_char_list) == 0)
             }
         }
 
@@ -165,6 +178,13 @@ spec("LinkedList") {
                 check(output_c == 'b')
                 check(LinkedList_char_pop_back(&my_char_list, &output_c))
                 check(output_c == 'a')
+                check(LinkedList_char_size(my_char_list) == 0)
+            }
+        }
+
+        describe("size") {
+            it("should be 3") {
+                check(LinkedList_char_size(my_char_list) == 3)
             }
         }
     }
