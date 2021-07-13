@@ -121,7 +121,7 @@ bool hvLinkedList_nth_Item(hvLinkedListOfItem *head, uintptr_t n, Item *output) 
  * Pop first item and return it
  * @param head Head of the list
  * @param output Where to save result?
- * @return first item in the list
+ * @return true if success. False otherwise.
  */
 bool hvLinkedList_pop_front_Item(hvLinkedListOfItem **head, Item *output) {
     // Is empty?
