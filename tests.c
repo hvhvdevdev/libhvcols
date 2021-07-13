@@ -58,11 +58,11 @@ spec("LinkedList") {
         }
 
         describe("pop_front") {
-            it("should fail")check(!LinkedList_float_pop_front(&my_float_list, &output_f))
+            it("should fail") check(!LinkedList_float_pop_front(&my_float_list, &output_f))
         }
 
         describe("pop_back") {
-            it("should fail")check(!LinkedList_float_pop_back(&my_float_list, &output_f))
+            it("should fail") check(!LinkedList_float_pop_back(&my_float_list, &output_f))
         }
 
         describe("nth") {
@@ -88,8 +88,31 @@ spec("LinkedList") {
                 check(output_c == 'a')
             }
 
-            it("should fail to get second item") {
-                check(!LinkedList_char_nth(my_char_list, 1, &output_c))
+            it("should fail to get second item") check(!LinkedList_char_nth(my_char_list, 1, &output_c))
+
+        }
+
+        describe("pop_front") {
+            it("should get first item") {
+                check(LinkedList_char_pop_front(&my_char_list, &output_c))
+                check(output_c == 'a')
+            }
+
+            it("should fail if called twice") {
+                check(LinkedList_char_pop_front(&my_char_list, &output_c))
+                check(!LinkedList_char_pop_front(&my_char_list, &output_c))
+            }
+        }
+
+        describe("pop_back") {
+            it("should get first item") {
+                check(LinkedList_char_pop_back(&my_char_list, &output_c))
+                check(output_c == 'a')
+            }
+
+            it("should fail if called twice") {
+                check(LinkedList_char_pop_back(&my_char_list, &output_c))
+                check(!LinkedList_char_pop_back(&my_char_list, &output_c))
             }
         }
     }
