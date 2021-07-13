@@ -61,6 +61,10 @@ spec("LinkedList") {
             it("should fail")check(!LinkedList_float_pop_front(&my_float_list, &output_f))
         }
 
+        describe("pop_back") {
+            it("should fail")check(!LinkedList_float_pop_back(&my_float_list, &output_f))
+        }
+
         describe("nth") {
             it("should fail with index 0") {
                 check(!LinkedList_float_nth(my_float_list, 0, &output_f))
