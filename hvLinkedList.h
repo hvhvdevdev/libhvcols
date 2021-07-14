@@ -133,7 +133,11 @@ bool LinkedList_pop_front(LinkedList **head, Item *output) {
     }
 
     *output = (*head)->item;
-    *head = (*head)->next;
+
+    LinkedList *next = (*head)->next;
+
+    free(*head);
+    *head = next;
 
     return true;
 }
@@ -162,6 +166,8 @@ bool LinkedList_pop_back(LinkedList **head, Item *output) {
     }
 
     *output = ptr->next->item;
+
+    free(ptr->next);
     ptr->next = NULL;
 
     return true;
