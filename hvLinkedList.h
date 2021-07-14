@@ -114,8 +114,7 @@ bool LinkedList_nth(LinkedList *head, uintptr_t n, Item *output) {
         }
     }
 
-    *
-            output = ptr->item;
+    *output = ptr->item;
 
     return true;
 }
